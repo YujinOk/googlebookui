@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Google Book UI</title>
+    </head>
+    <body>
+        <div class="grid__container">
+            <!-- Load font awesome icons -->
+            <link
+                rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+            />
+
+            <!-- The navigation menu -->
+            <div class="navbar">
+                <a href="#home">Home</a>
+                <div class="subnav">
+                    <button class="subnavbtn">
+                        About <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="subnav__content">
+                        <a href="#company">Company</a>
+                        <a href="#team">Team</a>
+                        <a href="#careers">Careers</a>
+                    </div>
+                </div>
+                <div class="subnav">
+                    <button class="subnavbtn">
+                        Hot Deals <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="subnav-content">
+                        <a href="#bring">Bring</a>
+                        <a href="#deliver">Deliver</a>
+                        <a href="#package">Package</a>
+                        <a href="#express">Express</a>
+                    </div>
+                </div>
+                <div class="subnav">
+                    <button class="subnavbtn">
+                        Best Seller <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="subnav-content">
+                        <a href="#link1">Fiction</a>
+                        <a href="#link2">Non-Fiction</a>
+                        <a href="#link3">Fantasy</a>
+                        <a href="#link4">Mystery</a>
+                    </div>
+                </div>
+
+                <input type="text" placeholder="Search... " />
+            </div>
+
+            <!-- Container for the image gallery -->
+            <div class="flex__container">
+                <!-- Full-width images with number text -->
+                <div class="mySlides">
+                    <div class="numbertext"></div>
+                    <img class="slides__img" src="./img/animalfarm.png" />
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext"></div>
+                    <img class="slides__img" src="./img/javascript.png" />
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext"></div>
+                    <img class="slides__img" src="./img/somebook.png" />
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext"></div>
+                    <img class="slides__img" src="./img/somebook2.png" />
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext"></div>
+                    <img class="slides__img" src="./img/somebook3.png" />
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext"></div>
+                    <img class="slides__img" src="./img/thegreatgastby.png" />
+                </div>
+
+                <!-- Next and previous buttons -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                <!-- Image text -->
+                <div class="caption-container">
+                    <p id="caption"></p>
+                </div>
+
+                <!-- Thumbnail images -->
+                <div class="flex__row">
+                    <div class="flex__items">
+                        <img
+                            class="thumbnail__img"
+                            src="./img/animalfarm.png"
+                            onclick="currentSlide(1)"
+                            alt="book"
+                        />
+                    </div>
+                    <div class="flex__items">
+                        <img
+                            class="thumbnail__img"
+                            src="./img/javascript.png"
+                            onclick="currentSlide(2)"
+                            alt="Cinque Terre"
+                        />
+                    </div>
+                    <div class="flex__items">
+                        <img
+                            class="thumbnail__img"
+                            src="./img/somebook.png"
+                            onclick="currentSlide(3)"
+                            alt="Mountains and fjords"
+                        />
+                    </div>
+                    <div class="flex__items">
+                        <img
+                            class="thumbnail__img"
+                            src="./img/somebook2.png"
+                            onclick="currentSlide(4)"
+                            alt="Northern Lights"
+                        />
+                    </div>
+                    <div class="flex__items">
+                        <img
+                            class="thumbnail__img"
+                            src="./img/TheMidnightLibrary.png"
+                            onclick="currentSlide(5)"
+                            alt="Nature and sunrise"
+                        />
+                    </div>
+                    <div class="flex__items">
+                        <img
+                            class="thumbnail__img"
+                            src="./img/thegreatgastby.png"
+                            onclick="currentSlide(6)"
+                            alt="Snowy Mountains"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
