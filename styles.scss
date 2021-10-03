@@ -2,11 +2,15 @@
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
         "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
-
+body {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
 /* The navigation menu */
 .navbar {
     overflow: hidden;
-    background-color: #f97613;
+    background-color: rgb(20, 20, 20);
 }
 
 /* Navigation links */
@@ -19,64 +23,16 @@
     text-decoration: none;
 }
 
-/* The subnavigation menu */
-.subnav {
-    float: left;
-    overflow: hidden;
-}
-
-/* Subnav button */
-.subnav .subnavbtn {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 16px;
-    background-color: #f97613;
-    font-family: inherit;
-    margin: 0;
-}
-
 /* Add a red background color to navigation links on hover */
-.navbar a:hover,
-.subnav:hover .subnavbtn,
-.subnav-content a:hover {
+a:hover {
     background-color: black;
 }
 
-/* Style the subnav content - positioned absolute */
-.subnav__content {
-    display: none;
-    position: absolute;
-    left: 0;
-    background-color: #f97613;
-    width: 100%;
-    z-index: 1;
-}
-
-/* Style the subnav links */
-.subnav__content a {
-    float: left;
-    color: white;
-    text-decoration: none;
-}
-
-/* Add a grey background color on hover */
-.subnav-content a:hover {
-    background-color: orange;
-    color: black;
-}
-
-/* When you move the mouse over the subnav container, open the subnav content */
-.subnav:hover .subnav-content {
-    display: block;
-}
-
 input {
-    width: 40%;
+    width: 46%;
     height: 40px;
-    padding: 0 20px;
-    margin-left: 19%;
+    // padding: 0 15px;
+    margin-left: 10%;
 }
 
 * {
@@ -85,7 +41,6 @@ input {
 
 /* Slideshow container */
 .slideshow-container {
-    // max-width: 1000px;
     position: relative;
     margin: auto;
 }
@@ -93,9 +48,15 @@ input {
 /* Hide the images by default */
 .mySlides {
     display: none;
-    background-color: black;
-    // max-height: 600px;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+        90deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(9, 9, 121, 1) 35%,
+        rgba(0, 212, 255, 1) 100%
+    );
 }
+
 .slides__img {
     width: 40%;
     height: 500px;
@@ -118,6 +79,7 @@ input {
     border-radius: 0 3px 3px 0;
     user-select: none;
 }
+
 .thumbnail__img {
     width: 100px;
     height: 100px;
@@ -179,17 +141,14 @@ input {
     animation-name: fade;
     animation-duration: 1.5s;
 }
-// .flex__container {
-//     display: flex;
-//     justify-content: center;
-//     flex-direction: row;
-// }
+
 .flex__row {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
+
 @-webkit-keyframes fade {
     from {
         opacity: 0.4;
@@ -198,7 +157,6 @@ input {
         opacity: 1;
     }
 }
-
 @keyframes fade {
     from {
         opacity: 0.4;
