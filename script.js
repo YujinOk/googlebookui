@@ -1,4 +1,4 @@
-"strict";
+"use strict";
 let slideIndex = 1;
 
 // Next/previous controls
