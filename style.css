@@ -10,6 +10,7 @@ body {
     background-color: white;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 hr {
     width: 90%;
@@ -194,4 +195,33 @@ input:focus {
     to {
         opacity: 1;
     }
+}
+
+/* grid-styling */
+.grid__container {
+    display: grid;
+
+    align-items: center;
+    grid-template-columns: repeat(6, 10%);
+    grid-template-rows: repeat(3, 100%);
+    justify-content: space-evenly;
+
+    /* border: 2px solid black; */
+    height: 300px;
+}
+.books {
+    height: 250px;
+    padding: auto;
+}
+img {
+    height: 200px;
+    width: 150px;
+}
+h2 {
+    padding-left: 80px;
+    color: #717171;
+}
+
+#book__title {
+    color: #717171;
 }
