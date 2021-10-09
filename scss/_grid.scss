@@ -1,0 +1,22 @@
+.grid__container {
+    display: grid;
+
+    align-items: center;
+    grid-template-columns: repeat(6, 10%);
+    grid-template-rows: repeat(3, 100%);
+    justify-content: space-evenly;
+
+    /* border: 2px solid black; */
+    height: 300px;
+}
+.books {
+    height: 250px;
+    padding: auto;
+}
+img {
+    height: 200px;
+    width: 150px;
+}
+#book__title {
+    color: #717171;
+}

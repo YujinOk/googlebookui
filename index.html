@@ -5,27 +5,29 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="style.css" />
-        <title>Google Book UI</title>
-
+        <title>Yujin's Google Book library</title>
 </head>
-<!-- The navigation menu -->
+
+<!-- The navbar -->
 <div class="navbar">
   <h1>Welcome to <em>Yujin's </em> Library 📚</h1>
  
-  <input class="search" type="text" placeholder="Search...">
-  <a id="searchBtn">🔍</a>
+  <input class="navbar__search" type="text" placeholder="Search book title">
+  <a id="navbar__search__Btn">🔍</a>
 </div>
-<nav class="nav">
-    <a href="#">Home</a>
+
+<nav class="navbar__header">
+    <a href="#navbar__search__Btn">Home</a>
     <a href="#bestSeller">Best Seller</a>
     <a href="#">Category</a>
-    <a href="#hotDeals">Hot Deals</a>
-</nav>
+    <a href="#todaysBook">Hot Deals</a>
+  </nav>
+
             <!-- Container for the image gallery -->
             <div class="flex__container">
                 <!-- Full-width images with number text -->
-                <div class="mySlides">
-                    <div class="numbertext"></div>
+                <div class="slides">
+                    <div class="slides__numbertext"></div>
                     <img class="slides__img" src="./img/animalfarm.png" />
                     
                     <p class="title"></p>
@@ -33,40 +35,40 @@
                     <p class="des"></p>
                 </div>
 
-                <div class="mySlides">
-                    <div class="numbertext"></div>
+                <div class="slides">
+                    <div class="slide__numbertext"></div>
                     <img class="slides__img" src="./img/javascript.png" />
                     <p class="title"></p>
                     <p class="author"></p>
                     <p class="des"></p>
                 </div>
 
-                <div class="mySlides">
-                    <div class="numbertext"></div>
+                <div class="slides">
+                    <div class="slide__numbertext"></div>
                     <img class="slides__img" src="./img/somebook.png" />
                     <p class="title"></p>
                     <p class="author"></p>
                     <p class="des"></p>
                 </div>
 
-                <div class="mySlides">
-                    <div class="numbertext"></div>
+                <div class="slides">
+                    <div class="slide__numbertext"></div>
                     <img class="slides__img" src="./img/somebook2.png" />
                     <p class="title"></p>
                     <p class="author"></p>
                     <p class="des"></p>
                 </div>
 
-                <div class="mySlides">
-                    <div class="numbertext"></div>
+                <div class="slides">
+                    <div class="slide__numbertext"></div>
                     <img class="slides__img" src="./img/somebook3.png" />
                     <p class="title"></p>
                     <p class="author"></p>
                     <p class="des"></p>
                 </div>
 
-                <div class="mySlides">
-                    <div class="numbertext"></div>
+                <div class="slides">
+                    <div class="slide__numbertext"></div>
                     <img class="slides__img" src="./img/thegreatgastby.png" />
                     <p class="title"></p>
                     <p class="author"></p>
@@ -162,7 +164,7 @@
                     </div>
                     <div class="books">
                         <img src="img/Tokillamocknigbird.png" alt="Tokillamocknigbird">
-                        <p id="book__title">To Kill a Mockingbird</p>
+                        <p id="book__title">To Kill a Mockingbird.</p>
                     </div>
                     
                     
@@ -170,7 +172,11 @@
           <hr>
          
           <div>
-              <h2 id="hotDeals">Today's Book</h2>
+
+              <h2 id="todaysBook">Today's Book</h2>
+
+       
+
           </div>
           <hr>
           <div class="grid__container">
@@ -203,7 +209,7 @@
               </div>
               
               
-      </div> 
+
 
         </div>
         <script type="module"src="js/fetch.js"></script>

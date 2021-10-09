@@ -1,45 +1,20 @@
-import { getBook } from "./fetch.js";
+import { fetchBook, makeBookObj } from "./fetch.js";
+// Return order:  Fetch(searchTerm) => makeBookObj(searchTerm) => Render(value from the user search bar)
+// Call order: Render('happy poter')=> makeBookObj(searchTerm) => Fetch(searchTerm)
 
-// document.querySelector("a").innerText = bookTitle[0];
-async function newGetBook(searchTerms) {
-    const bookJson = await getBook(searchTerms);
-    const items = bookJson.items;
-    let newArrTitle = [];
-    let newArrAuthors = [];
-    let newArrImgLinks = [];
-
-    items.forEach((item) => {
-        newArrTitle.push(item.volumeInfo.title);
-    });
-    console.log(newArrTitle);
-
-    newArrAuthors = items.map((item) => {
-        return item.volumeInfo.authors;
-    });
-    newArrImgLinks = items.map((item) => item.volumeInfo.imageLinks);
-
-    console.log(newArrImgLinks);
-    const bookDetails = {
-        title: newArrTitle,
-        authors: newArrAuthors,
-        imglink: newArrImgLinks,
-    };
-    return bookDetails;
-}
-// newGetBook();
 const slideImg = document.querySelectorAll(".slides__img");
 const thumbNailImg = document.querySelectorAll(".thumbnail__img");
-// const search = document.querySelector(".search").value;
-const searchBtn = document.querySelector("#searchBtn");
+const searchBtn = document.querySelector("#navbar__search__Btn");
 const title = document.querySelectorAll(".title");
 const authors = document.querySelectorAll(".author");
 const description = document.querySelectorAll(".des");
 
 async function renderBook(searchTerms) {
-    const infoBooks = await newGetBook(searchTerms);
-    // console.log(infoBooks);
+    const infoBooks = await makeBookObj(searchTerms);
+    console.log(infoBooks);
     slideImg.forEach((item, index) => {
         item.setAttribute("src", infoBooks.imglink[index].thumbnail);
+        // Looping through the slideImg current item and index of that slideImg array - by accessing index of imglink array in order to grab the url from thumbnail
     });
     thumbNailImg.forEach((item, index) => {
         item.setAttribute("src", infoBooks.imglink[index].thumbnail);
@@ -52,9 +27,8 @@ async function renderBook(searchTerms) {
         book.innerText = `Author: ${infoBooks.authors[index]}`;
     });
 }
-renderBook();
 
 searchBtn.addEventListener("click", () => {
-    const search = document.querySelector(".search").value;
+    const search = document.querySelector(".navbar__search").value;
     renderBook(search);
 });
