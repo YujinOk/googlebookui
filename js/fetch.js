@@ -1,6 +1,6 @@
 "use strict";
 
-async function getBook(searchterms) {
+async function fetchBook(searchterms) {
     // 1. made googlebooks API key
     // 2. found the fetch code lines
     // 3. found a way to get array of data from the json
@@ -15,23 +15,38 @@ async function getBook(searchterms) {
             searchterms +
             "&key=AIzaSyDh0KfqPFEslm8mZInmTgAUbAY0KgSNsbs",
     );
+
     const bookJson = await bookData.json();
     return bookJson;
-    // .then((response) => respo nse.json())
-    // .then((result) => {
-    //     // this.setState({ books: result.items })
-    //     // bookData.push(result);
-    //     // console.log(result.items);
-    //     bookData = result.items.map((book) => {
-    //         return book.volumeInfo.title;
-    //     });
-    //     console.log(bookData);
-    //     return bookData;
-    // });
-    // .then((bookTitle) => {
-    //     console.log(bookTitle);
-    //     // document.querySelector("a").innerText = bookTitle[0];
-    // });
+}
+async function makeBookObj(searchTerms) {
+    const bookJsonfromFetch = await fetchBook(searchTerms);
+    // store the items object from json (reference due to it being object)
+    // This benefits looping and that looping is for storing them into empty array therefore, I can render the informtation on DOM
+    const items = bookJsonfromFetch.items;
+    let newArrTitle = [];
+    let newArrAuthors = [];
+    let newArrImgLinks = [];
+
+    items.forEach((item) => {
+        // accessing the object information of json data i got so i can push them into newArrTitle emtpry array
+        newArrTitle.push(item.volumeInfo.title);
+    });
+    console.log(newArrTitle);
+
+    newArrAuthors = items.map((item) => {
+        return item.volumeInfo.authors;
+    });
+    newArrImgLinks = items.map((item) => item.volumeInfo.imageLinks);
+
+    console.log(newArrImgLinks);
+    const bookDetails = {
+        // making an object with new arrays filed with new information of book data
+        title: newArrTitle,
+        authors: newArrAuthors,
+        imglink: newArrImgLinks,
+    };
+    return bookDetails;
 }
 
-export { getBook };
+export { fetchBook, makeBookObj };

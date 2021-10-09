@@ -1,0 +1,48 @@
+@mixin hover {
+    color: #717171;
+    cursor: pointer;
+    background-color: pink;
+}
+.navbar {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 2px solid pink;
+    &__header {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    &__header > a {
+        color: pink;
+        font-weight: 700;
+        font-size: 20px;
+        float: left;
+
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        &:hover {
+            @include hover;
+        }
+    }
+
+    &__search {
+        width: 40%;
+        height: 40px;
+        margin-left: auto;
+
+        &:focus {
+            outline-width: 2;
+            outline-color: pink;
+        }
+    }
+}
+#navbar__search__Btn {
+    padding: 14px 16px;
+    &:hover {
+        @include hover;
+    }
+}
