@@ -1,166 +1,188 @@
 .navbar {
-  overflow: hidden;
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  border-bottom: 2px solid pink;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 2px solid pink;
 }
 .navbar__header {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 .navbar__header > a {
-  color: pink;
-  font-weight: 700;
-  font-size: 20px;
-  float: left;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+    color: pink;
+    font-weight: 700;
+    font-size: 20px;
+    float: left;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }
 .navbar__header > a:hover {
-  color: #717171;
-  cursor: pointer;
-  background-color: pink;
+    color: #717171;
+    cursor: pointer;
+    background-color: pink;
 }
 .navbar__search {
-  width: 40%;
-  height: 40px;
-  margin-left: auto;
+    width: 40%;
+    height: 40px;
+    margin-left: auto;
 }
 .navbar__search:focus {
-  outline-width: 2;
-  outline-color: pink;
+    outline-width: 2;
+    outline-color: pink;
 }
 
 #navbar__search__Btn {
-  padding: 14px 16px;
+    padding: 14px 16px;
 }
 #navbar__search__Btn:hover {
-  color: #717171;
-  cursor: pointer;
-  background-color: pink;
+    color: #717171;
+    cursor: pointer;
+    background-color: pink;
 }
 
 .slides {
-  display: none;
+    display: none;
 }
 .slides__numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
 }
 .slides__img {
-  width: 40%;
-  height: 500px;
-  margin: 5% 30%;
+    width: 40%;
+    height: 500px;
+    margin: 5% 30%;
 }
 
 .prev,
 .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: hotpink;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: hotpink;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
 }
 
 .next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
+    right: 0;
+    border-radius: 3px 0 0 3px;
 }
 
 .prev:hover,
 .next:hover {
-  background-color: pink;
+    background-color: pink;
 }
 
 .thumbnail__img {
-  width: 100px;
-  height: 100px;
+    width: 100px;
+    height: 100px;
 }
 
 .text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
 }
 
 .flex__row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .grid__container {
-  display: grid;
-  align-items: center;
-  grid-template-columns: repeat(6, 10%);
-  grid-template-rows: repeat(3, 100%);
-  justify-content: space-evenly;
-  /* border: 2px solid black; */
-  height: 300px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(6, 10%);
+    grid-template-rows: repeat(3, 100%);
+    justify-content: space-evenly;
+    /* border: 2px solid black; */
+    height: 300px;
 }
 
 .books {
-  height: 250px;
-  padding: auto;
+    height: 250px;
+    padding: auto;
 }
 
 img {
-  height: 200px;
-  width: 150px;
+    height: 200px;
+    width: 150px;
 }
 
 #book__title {
-  color: #717171;
+    color: #717171;
 }
 
 * {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  box-sizing: border-box;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
 }
 
 body {
-  background-color: white;
-  margin: 0;
-  padding: 0;
-  width: 100%;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
 h1 {
-  margin-left: 3%;
-  -webkit-text-stroke: 3px hotpink;
+    margin-left: 3%;
+    -webkit-text-stroke: 3px hotpink;
 }
 
 h2 {
-  padding-left: 80px;
-  color: #717171;
+    padding-left: 80px;
+    color: #717171;
 }
 
 hr {
-  width: 90%;
-  border: 1.5px solid pink;
-  background-color: pink;
+    width: 90%;
+    border: 1.5px solid pink;
+    background-color: pink;
 }
 
 p {
-  text-align: center;
-  color: #424242;
+    text-align: center;
+    color: #424242;
 }
+
+@media screen and (max-device-width: 780px) {
+    img {
+        width: 98%;
+        height: 50%;
+    }
+    .books {
+        margin-top: 120%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    #book__title {
+        height: 40%;
+        font-size: 13px;
+    }
+}
+
+/* height: 200px;
+width: 150px; */

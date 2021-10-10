@@ -19,14 +19,17 @@ async function fetchBook(searchterms) {
     const bookJson = await bookData.json();
     return bookJson;
 }
+
 async function makeBookObj(searchTerms) {
     const bookJsonfromFetch = await fetchBook(searchTerms);
+    console.log(bookJsonfromFetch);
     // store the items object from json (reference due to it being object)
     // This benefits looping and that looping is for storing them into empty array therefore, I can render the informtation on DOM
     const items = bookJsonfromFetch.items;
     let newArrTitle = [];
     let newArrAuthors = [];
     let newArrImgLinks = [];
+    let newArrDes = [];
 
     items.forEach((item) => {
         // accessing the object information of json data i got so i can push them into newArrTitle emtpry array
@@ -40,11 +43,17 @@ async function makeBookObj(searchTerms) {
     newArrImgLinks = items.map((item) => item.volumeInfo.imageLinks);
 
     console.log(newArrImgLinks);
+
+    items.map((item) => {
+        newArrDes.push(item.volumeInfo.description);
+    });
+    console.log(newArrDes);
     const bookDetails = {
         // making an object with new arrays filed with new information of book data
         title: newArrTitle,
         authors: newArrAuthors,
         imglink: newArrImgLinks,
+        description: newArrDes,
     };
     return bookDetails;
 }
