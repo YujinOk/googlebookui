@@ -11,40 +11,38 @@ const modalBtn = document.querySelectorAll(".myModalBtn");
 const modalText = document.querySelectorAll(".myModalText");
 
 async function renderBook(searchTerms) {
-    const infoBooks = await makeBookObj(searchTerms);
-    console.log(infoBooks.description);
-    slideImg.forEach((item, index) => {
-        item.setAttribute("src", infoBooks.imglink[index].thumbnail);
-        // Looping through the slideImg current item and index of that slideImg array - by accessing index of imglink array in order to grab the url from thumbnail
-    });
-    thumbNailImg.forEach((item, index) => {
-        item.setAttribute("src", infoBooks.imglink[index].thumbnail);
-    });
+  const infoBooks = await makeBookObj(searchTerms);
+ 
+  slideImg.forEach((item, index) => {
+    item.setAttribute("src", infoBooks.imglink[index].thumbnail);
+    // first arg, what its gonna be changed, sec arg: new value to replace of that attribute
+    // Looping through the slideImg current item and index of that slideImg array - by accessing index of imglink array in order to grab the url from thumbnail
+  });
+  thumbNailImg.forEach((item, index) => {
+    item.setAttribute("src", infoBooks.imglink[index].thumbnail);
+  });
 
-    title.forEach((book, index) => {
-        book.innerText = `Title: ${infoBooks.title[index]}`;
+  title.forEach((book, index) => {
+    book.innerText = `Title: ${infoBooks.title[index]}`;
+  });
+  authors.forEach((book, index) => {
+    book.innerText = `Author: ${infoBooks.authors[index]}`;
+  });
+  modalBtn.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      if (modalText[index].innerText === "") {
+        modalText[index].innerText = `${infoBooks.description[index]}`;
+        btn.innerText = "❌";
+      } else {
+        modalText[index].innerText = "";
+        btn.innerText = "Click for more info...";
+      }
     });
-    authors.forEach((book, index) => {
-        book.innerText = `Author: ${infoBooks.authors[index]}`;
-    });
-    modalBtn.forEach((btn, index) => {
-        btn.addEventListener("click", () => {
-            if (modalText[index].innerText === "") {
-                console.log("hi");
-                modalText[index].innerText = `${infoBooks.description[index]}`;
-                btn.innerText = "❌";
-            } else {
-                modalText[index].innerText = "";
-                btn.innerText = "Click for more info...";
-            }
-        });
-    });
+  });
 }
 
 searchBtn.addEventListener("click", () => {
-    const search = document.querySelector(".navbar__search").value;
-    renderBook(search);
+  const search = document.querySelector(".navbar__search").value;
+  renderBook(search);
 });
-// descriptionBtn.addEventListener("click", () => {
-//     descriptionBtn.innerText = `${infoBooks.description[0]}`;
-// });
+
