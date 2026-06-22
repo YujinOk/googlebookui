@@ -1,45 +1,27 @@
 "use strict";
 
-
 async function fetchBook(searchterms) {
-    const bookData = await fetch(
+    const response = await fetch(
         "https://www.googleapis.com/books/v1/volumes?q=" +
             encodeURIComponent(searchterms),
     );
-    const bookJson = await bookData.json();
-    return bookJson;
+    if (!response.ok) throw new Error(`API error: ${response.status}`);
+    return response.json();
 }
 
 async function makeBookObj(searchTerms) {
-    const bookJsonfromFetch = await fetchBook(searchTerms);
-    // store the items object from json (reference due to it being object)
-    // This benefits looping and that looping is for storing them into empty array therefore, I can render the informtation on DOM
-    const items = bookJsonfromFetch.items;
-    let newArrTitle = [];
-    let newArrDes = [];
+    const data = await fetchBook(searchTerms);
+    if (!data.items?.length) throw new Error("No results found.");
 
-    items.forEach((item) => {
-        // accessing the object information of json data i got so i can push them into newArrTitle emtpry array
-        newArrTitle.push(item.volumeInfo.title);
+    return data.items.slice(0, 6).map((item) => {
+        const info = item.volumeInfo ?? {};
+        return {
+            title:       info.title ?? "Unknown Title",
+            authors:     info.authors?.join(", ") ?? "Unknown Author",
+            imglink:     info.imageLinks?.thumbnail ?? "",
+            description: info.description ?? "No description available.",
+        };
     });
-
-    const newArrAuthors = items.map((item) => {
-        return item.volumeInfo.authors;
-    });
-    const newArrImgLinks = items.map((item) => item.volumeInfo.imageLinks);
-
-    items.map((item) => {
-        newArrDes.push(item.volumeInfo.description);
-    });
-
-    const bookDetails = {
-        // making an object with new arrays filed with new information of book data
-        title: newArrTitle,
-        authors: newArrAuthors,
-        imglink: newArrImgLinks,
-        description: newArrDes,
-    };
-    return bookDetails;
 }
 
-export { fetchBook, makeBookObj };
+export { makeBookObj };

@@ -1,32 +1,24 @@
 "use strict";
+
 let slideIndex = 1;
 
-// Next/previous controls
-function plusSlides(parameter) {
-    showSlides((slideIndex = parameter + slideIndex));
+function plusSlides(step) {
+    showSlides(slideIndex + step);
 }
 
-// Thumbnail image controls
-function currentSlide(parameter) {
-    showSlides((slideIndex = parameter));
+function currentSlide(n) {
+    showSlides(n);
 }
 
-function showSlides(parameter) {
-    let i;
-    let slides = document.getElementsByClassName("slides");
+function showSlides(n) {
+    const slides = document.querySelectorAll(".slides");
 
-    if (parameter > slides.length) {
-        slideIndex = 1;
-    }
-    //  in order to keep the slides within the length of slides array (6)
-    if (parameter < 1) {
-        slideIndex = slides.length;
-    }
-    // in order to hide previous image, preventing from displaying all images at once
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    // slides[5].style.display="block" => display!
+    if (n > slides.length) slideIndex = 1;
+    else if (n < 1)        slideIndex = slides.length;
+    else                   slideIndex = n;
+
+    slides.forEach((slide) => { slide.style.display = "none"; });
     slides[slideIndex - 1].style.display = "block";
 }
+
 showSlides(slideIndex);

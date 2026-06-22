@@ -1,48 +1,109 @@
-import { fetchBook, makeBookObj } from "./fetch.js";
-// Return order:  Fetch(searchTerm) => makeBookObj(searchTerm) => Render(value from the user search bar)
-// Call order: Render('happy poter')=> makeBookObj(searchTerm) => Fetch(searchTerm)
+import { makeBookObj } from "./fetch.js";
 
-const slideImg = document.querySelectorAll(".slides__img");
-const thumbNailImg = document.querySelectorAll(".thumbnail__img");
-const searchBtn = document.querySelector("#navbar__search__Btn");
-const title = document.querySelectorAll(".title");
-const authors = document.querySelectorAll(".author");
-const modalBtn = document.querySelectorAll(".myModalBtn");
-const modalText = document.querySelectorAll(".myModalText");
+const slideImg    = document.querySelectorAll(".slides__img");
+const thumbImg    = document.querySelectorAll(".thumbnail__img");
+const searchInput = document.querySelector(".navbar__search");
+const searchBtn   = document.querySelector("#navbar__search__Btn");
+const titleEls    = document.querySelectorAll(".title");
+const authorEls   = document.querySelectorAll(".author");
+const modalBtn    = document.querySelectorAll(".myModalBtn");
+const modalText   = document.querySelectorAll(".myModalText");
 
-async function renderBook(searchTerms) {
-  const infoBooks = await makeBookObj(searchTerms);
- 
-  slideImg.forEach((item, index) => {
-    item.setAttribute("src", infoBooks.imglink[index].thumbnail);
-    // first arg, what its gonna be changed, sec arg: new value to replace of that attribute
-    // Looping through the slideImg current item and index of that slideImg array - by accessing index of imglink array in order to grab the url from thumbnail
-  });
-  thumbNailImg.forEach((item, index) => {
-    item.setAttribute("src", infoBooks.imglink[index].thumbnail);
-  });
+// Modal elements
+const modal       = document.getElementById("bookModal");
+const modalCover  = modal.querySelector(".modal__cover");
+const modalTitle  = modal.querySelector(".modal__title");
+const modalAuthor = modal.querySelector(".modal__author");
+const modalDesc   = modal.querySelector(".modal__description");
+const modalClose  = modal.querySelector(".modal__close");
+const backdrop    = modal.querySelector(".modal__backdrop");
 
-  title.forEach((book, index) => {
-    book.innerText = `Title: ${infoBooks.title[index]}`;
-  });
-  authors.forEach((book, index) => {
-    book.innerText = `Author: ${infoBooks.authors[index]}`;
-  });
-  modalBtn.forEach((btn, index) => {
-    btn.addEventListener("click", () => {
-      if (modalText[index].innerText === "") {
-        modalText[index].innerText = `${infoBooks.description[index]}`;
-        btn.innerText = "❌";
-      } else {
-        modalText[index].innerText = "";
-        btn.innerText = "Click for more info...";
-      }
-    });
-  });
+// Cached book data for the modal (set after search)
+let currentBooks = [];
+
+function openModal(book) {
+    modalCover.src = book.imglink;
+    modalCover.alt = book.title;
+    modalTitle.textContent  = book.title;
+    modalAuthor.textContent = book.authors;
+    modalDesc.textContent   = book.description;
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    modalClose.focus();
 }
 
-searchBtn.addEventListener("click", () => {
-  const search = document.querySelector(".navbar__search").value;
-  renderBook(search);
+function closeModal() {
+    modal.hidden = true;
+    document.body.style.overflow = "";
+}
+
+modalClose.addEventListener("click", closeModal);
+backdrop.addEventListener("click", closeModal);
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.hidden) closeModal();
 });
 
+// Wire up book grid cards to open modal
+document.querySelectorAll(".books").forEach((card, index) => {
+    card.addEventListener("click", () => {
+        const book = currentBooks[index];
+        if (book) openModal(book);
+    });
+});
+
+async function renderBook(searchTerms) {
+    if (!searchTerms.trim()) return;
+
+    // Show loading state on carousel images
+    slideImg.forEach((img) => { img.style.opacity = "0.3"; });
+
+    try {
+        const books = await makeBookObj(searchTerms);
+        currentBooks = books;
+
+        books.forEach((book, index) => {
+            if (slideImg[index]) {
+                slideImg[index].src = book.imglink;
+                slideImg[index].alt = book.title;
+                slideImg[index].style.opacity = "1";
+            }
+            if (thumbImg[index]) {
+                thumbImg[index].src = book.imglink;
+                thumbImg[index].alt = book.title;
+            }
+            if (titleEls[index])  titleEls[index].textContent  = book.title;
+            if (authorEls[index]) authorEls[index].textContent = book.authors;
+        });
+
+        // Replace old inline description toggle with modal trigger
+        modalBtn.forEach((btn, index) => {
+            const book = books[index];
+            if (!book) return;
+            const newBtn = btn.cloneNode(true);
+            btn.replaceWith(newBtn);
+            newBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                openModal(book);
+            });
+        });
+
+        // Clear any leftover description text
+        modalText.forEach((el) => { el.textContent = ""; });
+
+    } catch (err) {
+        slideImg.forEach((img) => { img.style.opacity = "1"; });
+        console.error(err);
+        alert(err.message === "No results found."
+            ? "No books found — try a different search."
+            : "Search failed. Please try again.");
+    }
+}
+
+function doSearch() {
+    renderBook(searchInput.value);
+}
+
+searchBtn.addEventListener("click", doSearch);
+searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") doSearch();
+});
