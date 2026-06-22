@@ -1,48 +1,83 @@
-@mixin hover {
-    color: #717171;
-    cursor: pointer;
-    background-color: pink;
-}
 .navbar {
-    overflow: hidden;
-    width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow: visible;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 2rem;
+  height: 64px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+
+  &__search {
+    flex: 1;
+    max-width: 360px;
+    margin-left: auto;
+    height: 36px;
+    padding: 0 1rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    transition: border-color 0.2s;
+
+    &::placeholder { color: var(--text-muted); }
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+  }
+
+  &__header {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
-    border-bottom: 2px solid pink;
-    &__header {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-    }
-    &__header > a {
-        color: pink;
-        font-weight: 700;
-        font-size: 20px;
-        float: left;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
 
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        &:hover {
-            @include hover;
-        }
-    }
+    & > a {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      float: none;
+      padding: 10px 16px;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      display: inline-block;
 
-    &__search {
-        width: 40%;
-        height: 40px;
-        margin-left: auto;
-
-        &:focus {
-            outline-width: 2;
-            outline-color: pink;
-        }
+      &:hover {
+        color: var(--text-primary);
+        background: transparent;
+        cursor: pointer;
+        border-bottom-color: var(--accent);
+      }
     }
+  }
 }
+
 #navbar__search__Btn {
-    padding: 14px 16px;
-    &:hover {
-        @include hover;
-    }
+  padding: 7px 16px;
+  background: var(--accent);
+  color: #0d1117;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s;
+  display: inline-block;
+
+  &:hover {
+    background: var(--accent-hover);
+    color: #0d1117;
+    cursor: pointer;
+  }
 }

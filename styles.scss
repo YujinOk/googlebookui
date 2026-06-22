@@ -1,36 +1,70 @@
 @use "./scss/navbar";
 @use "./scss/partial";
 @use "./scss/grid";
-$primary-color: hotpink;
-$secondary-color: pink;
-$tertiary-color: rgb(66, 66, 66);
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-card: #1c2128;
+  --text-primary: #cdd9e5;
+  --text-muted: #768390;
+  --accent: #e8a838;
+  --accent-hover: #f0b84a;
+  --border: #373e47;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  --radius: 8px;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
 
 * {
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background-color: white;
-    margin: 0;
-    padding: 0;
-    width: 100%;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  width: 100%;
+  min-height: 100vh;
 }
+
 h1 {
-    margin-left: 3%;
-    -webkit-text-stroke: 3px $primary-color;
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+  -webkit-text-stroke: 0;
+  letter-spacing: 0.02em;
 }
+
 h2 {
-    padding-left: 80px;
-    color: #717171;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 2.5rem 2rem 1.25rem;
+  letter-spacing: 0.02em;
 }
+
 hr {
-    width: 90%;
-    border: 1.5px solid $secondary-color;
-    background-color: $secondary-color;
+  border: none;
+  border-top: 1px solid var(--border);
+  width: 90%;
+  margin: 0 auto;
 }
+
 p {
-    text-align: center;
-    color: $tertiary-color;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
