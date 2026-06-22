@@ -4,11 +4,8 @@
 async function fetchBook(searchterms) {
     const bookData = await fetch(
         "https://www.googleapis.com/books/v1/volumes?q=" +
-            searchterms +
-            "&key=AIzaSyDh0KfqPFEslm8mZInmTgAUbAY0KgSNsbs",
+            encodeURIComponent(searchterms),
     );
-    
-    // convert Json -> into JS obj
     const bookJson = await bookData.json();
     return bookJson;
 }
