@@ -1,58 +1,68 @@
 import { makeBookObj } from "./fetch.js";
 
-console.log("dom.js loaded");
-
+// Core DOM refs
 const slideImg    = document.querySelectorAll(".slides__img");
 const thumbImg    = document.querySelectorAll(".thumbnail__img");
 const searchInput = document.querySelector(".navbar__search");
 const searchBtn   = document.querySelector("#navbar__search__Btn");
 const titleEls    = document.querySelectorAll(".title");
 const authorEls   = document.querySelectorAll(".author");
-const modalBtn    = document.querySelectorAll(".myModalBtn");
-const modalText   = document.querySelectorAll(".myModalText");
 const searchError = document.getElementById("searchError");
 
-// Modal elements
-const modal       = document.getElementById("bookModal");
-const modalCover  = modal.querySelector(".modal__cover");
-const modalTitle  = modal.querySelector(".modal__title");
-const modalAuthor = modal.querySelector(".modal__author");
-const modalDesc   = modal.querySelector(".modal__description");
-const modalClose  = modal.querySelector(".modal__close");
-const backdrop    = modal.querySelector(".modal__backdrop");
+// Modal refs — looked up lazily to avoid crashing module init if HTML changes
+const modal = document.getElementById("bookModal");
 
-// Cached book data for the modal (set after search)
 let currentBooks = [];
 
+// ── Modal ──────────────────────────────────────────────────────────────────
+
 function openModal(book) {
-    modalCover.src = book.imglink;
-    modalCover.alt = book.title;
-    modalTitle.textContent  = book.title;
-    modalAuthor.textContent = book.authors;
-    modalDesc.textContent   = book.description;
+    if (!modal) return;
+    modal.querySelector(".modal__cover").src         = book.imglink;
+    modal.querySelector(".modal__cover").alt         = book.title;
+    modal.querySelector(".modal__title").textContent = book.title;
+    modal.querySelector(".modal__author").textContent = book.authors;
+    modal.querySelector(".modal__description").textContent = book.description;
     modal.hidden = false;
     document.body.style.overflow = "hidden";
-    modalClose.focus();
+    modal.querySelector(".modal__close").focus();
 }
 
 function closeModal() {
+    if (!modal) return;
     modal.hidden = true;
     document.body.style.overflow = "";
 }
 
-modalClose.addEventListener("click", closeModal);
-backdrop.addEventListener("click", closeModal);
+// Use event delegation so we don't crash if buttons are missing at init
+document.addEventListener("click", (e) => {
+    if (e.target.closest(".modal__close") || e.target.matches(".modal__backdrop")) closeModal();
+});
 document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !modal.hidden) closeModal();
+    if (e.key === "Escape" && modal && !modal.hidden) closeModal();
 });
 
-// Wire up book grid cards to open modal
+// Book grid cards → open modal
 document.querySelectorAll(".books").forEach((card, index) => {
     card.addEventListener("click", () => {
-        const book = currentBooks[index];
-        if (book) openModal(book);
+        if (currentBooks[index]) openModal(currentBooks[index]);
     });
 });
+
+// Carousel "More info" buttons → open modal
+// Use delegation instead of NodeList cloning to avoid replaceWith errors
+document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".myModalBtn");
+    if (!btn) return;
+    const slides = document.querySelectorAll(".slides");
+    const index  = [...slides].findIndex((slide) => slide.contains(btn));
+    if (index !== -1 && currentBooks[index]) {
+        e.stopPropagation();
+        openModal(currentBooks[index]);
+    }
+});
+
+// ── Search ─────────────────────────────────────────────────────────────────
 
 async function renderBook(searchTerms) {
     if (!searchTerms.trim()) return;
@@ -66,8 +76,8 @@ async function renderBook(searchTerms) {
 
         books.forEach((book, index) => {
             if (slideImg[index]) {
-                slideImg[index].src = book.imglink;
-                slideImg[index].alt = book.title;
+                slideImg[index].src   = book.imglink;
+                slideImg[index].alt   = book.title;
                 slideImg[index].style.opacity = "1";
             }
             if (thumbImg[index]) {
@@ -78,25 +88,13 @@ async function renderBook(searchTerms) {
             if (authorEls[index]) authorEls[index].textContent = book.authors;
         });
 
-        // Replace old inline description toggle with modal trigger
-        modalBtn.forEach((btn, index) => {
-            const book = books[index];
-            if (!book) return;
-            const newBtn = btn.cloneNode(true);
-            btn.replaceWith(newBtn);
-            newBtn.addEventListener("click", (e) => {
-                e.stopPropagation();
-                openModal(book);
-            });
-        });
-
-        // Clear any leftover description text
-        modalText.forEach((el) => { el.textContent = ""; });
+        // Reset any remaining slides to full opacity
+        slideImg.forEach((img) => { img.style.opacity = "1"; });
 
     } catch (err) {
         slideImg.forEach((img) => { img.style.opacity = "1"; });
-        console.error("Search error:", err);
-        searchError.textContent = err.message === "No results found."
+        console.error("Search failed:", err);
+        searchError.textContent = err.message.includes("No results")
             ? "No books found — try a different search term."
             : `Search failed: ${err.message}`;
         searchError.hidden = false;

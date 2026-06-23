@@ -1,10 +1,13 @@
 "use strict";
 
+import { API_KEY } from "./config.js";
+
 async function fetchBook(searchterms) {
-    const response = await fetch(
+    const url =
         "https://www.googleapis.com/books/v1/volumes?q=" +
-            encodeURIComponent(searchterms),
-    );
+        encodeURIComponent(searchterms) +
+        "&key=" + API_KEY;
+    const response = await fetch(url);
     if (!response.ok) throw new Error(`API error: ${response.status}`);
     return response.json();
 }
