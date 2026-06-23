@@ -18,7 +18,7 @@ async function makeBookObj(searchTerms) {
         return {
             title:       info.title ?? "Unknown Title",
             authors:     info.authors?.join(", ") ?? "Unknown Author",
-            imglink:     info.imageLinks?.thumbnail ?? "",
+            imglink:     (info.imageLinks?.thumbnail ?? "").replace("http://", "https://"),
             description: info.description ?? "No description available.",
         };
     });

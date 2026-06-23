@@ -1,5 +1,7 @@
 import { makeBookObj } from "./fetch.js";
 
+console.log("dom.js loaded");
+
 const slideImg    = document.querySelectorAll(".slides__img");
 const thumbImg    = document.querySelectorAll(".thumbnail__img");
 const searchInput = document.querySelector(".navbar__search");
@@ -8,6 +10,7 @@ const titleEls    = document.querySelectorAll(".title");
 const authorEls   = document.querySelectorAll(".author");
 const modalBtn    = document.querySelectorAll(".myModalBtn");
 const modalText   = document.querySelectorAll(".myModalText");
+const searchError = document.getElementById("searchError");
 
 // Modal elements
 const modal       = document.getElementById("bookModal");
@@ -54,7 +57,7 @@ document.querySelectorAll(".books").forEach((card, index) => {
 async function renderBook(searchTerms) {
     if (!searchTerms.trim()) return;
 
-    // Show loading state on carousel images
+    searchError.hidden = true;
     slideImg.forEach((img) => { img.style.opacity = "0.3"; });
 
     try {
@@ -92,10 +95,11 @@ async function renderBook(searchTerms) {
 
     } catch (err) {
         slideImg.forEach((img) => { img.style.opacity = "1"; });
-        console.error(err);
-        alert(err.message === "No results found."
-            ? "No books found — try a different search."
-            : "Search failed. Please try again.");
+        console.error("Search error:", err);
+        searchError.textContent = err.message === "No results found."
+            ? "No books found — try a different search term."
+            : `Search failed: ${err.message}`;
+        searchError.hidden = false;
     }
 }
 

@@ -84,11 +84,11 @@ h1 {
   background: var(--accent);
   color: #0d1117;
   border-radius: 6px;
+  border: none;
   font-family: var(--font-sans);
   font-weight: 600;
   font-size: 0.875rem;
   cursor: pointer;
-  text-decoration: none;
   white-space: nowrap;
   transition: background 0.2s;
   display: inline-block;
@@ -96,8 +96,6 @@ h1 {
 
 #navbar__search__Btn:hover {
   background: var(--accent-hover);
-  color: #0d1117;
-  cursor: pointer;
 }
 
 /* ===== SUBNAV ===== */
@@ -279,6 +277,21 @@ hr {
   background-color: transparent;
 }
 
+/* ===== CONTENT MAX-WIDTH ===== */
+section {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Carousel section overrides max-width so its bg spans full page */
+#featured {
+  max-width: 100%;
+}
+
+#featured .flex__container {
+  max-width: 100%;
+}
+
 /* ===== SECTION HEADINGS ===== */
 h2 {
   font-family: var(--font-serif);
@@ -287,6 +300,20 @@ h2 {
   color: var(--text-primary);
   padding: 2.5rem 2rem 1.25rem;
   letter-spacing: 0.02em;
+}
+
+/* ===== ERROR BANNER ===== */
+.search-error {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  background: rgba(248, 81, 73, 0.15);
+  border: 1px solid rgba(248, 81, 73, 0.4);
+  border-radius: var(--radius);
+  color: #f85149;
+  font-size: 0.875rem;
+  text-align: left;
+  margin-top: 0.5rem;
 }
 
 /* ===== BOOK GRID ===== */
