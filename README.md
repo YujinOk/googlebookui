@@ -2,8 +2,6 @@
 
 A vanilla JavaScript book search app built on the Google Books API. Search any title and browse results in an interactive carousel, or explore the curated Best Seller and Today's Book sections below.
 
-![Library UI screenshot](https://i.imgur.com/placeholder.png)
-
 ---
 
 ## Features
@@ -40,6 +38,7 @@ cd googlebookui
 The API key is intentionally excluded from this repo. You need your own free Google Books API key.
 
 **Get one:**
+
 1. Go to [console.cloud.google.com](https://console.cloud.google.com)
 2. Create a project → APIs & Services → Enable **Books API**
 3. Credentials → Create API Key
