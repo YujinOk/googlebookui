@@ -8,12 +8,12 @@ A vanilla JavaScript book search app built on the Google Books API. Search any t
 
 ## Features
 
-- **Live book search** — queries the Google Books API and populates the carousel with real covers, titles, and authors
-- **Book detail modal** — click any book card or carousel result to open a detail panel with full description
-- **Image carousel** — swipe or click through featured results with thumbnail navigation
-- **Curated sections** — static Best Seller and Today's Book grids for browsing without searching
-- **Loading state** — spinner overlay and disabled search button during API fetch
-- **Error handling** — inline error banner for failed searches or empty results
+- **Live book search**: queries the Google Books API and populates the carousel with real covers, titles, and authors
+- **Book detail modal**: click any book card or carousel result to open a detail panel with full description
+- **Image carousel**: swipe or click through featured results with thumbnail navigation
+- **Curated sections**: static Best Seller and Today's Book grids for browsing without searching
+- **Loading state**: spinner overlay and disabled search button during API fetch
+- **Error handling**: inline error banner for failed searches or empty results
 
 ---
 
