@@ -7,7 +7,8 @@ const searchInput = document.querySelector(".navbar__search");
 const searchBtn   = document.querySelector("#navbar__search__Btn");
 const titleEls    = document.querySelectorAll(".title");
 const authorEls   = document.querySelectorAll(".author");
-const searchError = document.getElementById("searchError");
+const searchError   = document.getElementById("searchError");
+const carouselSpinner = document.querySelector(".carousel__spinner");
 
 // Modal refs — looked up lazily to avoid crashing module init if HTML changes
 const modal = document.getElementById("bookModal");
@@ -68,7 +69,9 @@ async function renderBook(searchTerms) {
     if (!searchTerms.trim()) return;
 
     searchError.hidden = true;
-    slideImg.forEach((img) => { img.style.opacity = "0.3"; });
+    searchBtn.disabled = true;
+    carouselSpinner.hidden = false;
+    slideImg.forEach((img) => { img.style.opacity = "0.15"; });
 
     try {
         const books = await makeBookObj(searchTerms);
@@ -88,7 +91,6 @@ async function renderBook(searchTerms) {
             if (authorEls[index]) authorEls[index].textContent = book.authors;
         });
 
-        // Reset any remaining slides to full opacity
         slideImg.forEach((img) => { img.style.opacity = "1"; });
 
     } catch (err) {
@@ -98,6 +100,9 @@ async function renderBook(searchTerms) {
             ? "No books found — try a different search term."
             : `Search failed: ${err.message}`;
         searchError.hidden = false;
+    } finally {
+        carouselSpinner.hidden = true;
+        searchBtn.disabled = false;
     }
 }
 

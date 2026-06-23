@@ -206,6 +206,41 @@ p.author {
   padding: 0 1rem;
 }
 
+/* ===== CAROUSEL SPINNER ===== */
+.carousel__spinner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(22, 27, 34, 0.7);
+  z-index: 10;
+  border-radius: 0;
+}
+
+.carousel__spinner[hidden] {
+  display: none;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Disabled search button state */
+#navbar__search__Btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* ===== CAROUSEL ARROWS ===== */
 .prev,
 .next {
@@ -484,6 +519,7 @@ img {
   text-align: left;
   display: -webkit-box;
   -webkit-line-clamp: 8;
+  line-clamp: 8;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
