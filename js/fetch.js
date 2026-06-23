@@ -1,8 +1,6 @@
 "use strict";
 
-// This key is restricted to specific HTTP referrers in Google Cloud Console.
-// See README for setup instructions if you're forking this project.
-const API_KEY = "AIzaSyDh0KfqPFEslm8mZInmTgAUbAY0KgSNsbs";
+import { API_KEY } from "./config.js";
 
 async function fetchBook(searchterms) {
     const url =
